@@ -1,9 +1,10 @@
 class AnswersController < ApplicationController
-	skip_before_action :verify_authenticity_token	
+	# skip_before_action :verify_authenticity_token	
 	def create
 		question = Question.find(params[:question_id])
 		@answer = question.answers.new(answer_params)
-		if @answer.save 
+		if @answer.save  
+			render json: @answer
 		else
       render json: {
         error: {

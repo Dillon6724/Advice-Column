@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :answers
   root 'application#main'
   resources :questions, only: [:index, :create], defaults: { format: :json } do
     resources :answers, only: [:create], shallow: true
