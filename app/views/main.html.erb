@@ -1,0 +1,32 @@
+<div ng-controller="QuestionsController as questions">
+	<h1>Help! people need your advice!! or.... <a href="#" class='linkbutton' ng-click="questionFormEnabled=!questionFormEnabled">ask</a></h1>
+	<div ng-show="questionFormEnabled">
+		<form ng-submit="questions.askQuestion()">
+			<input 	ng-model="questions.newQuestionBody"
+							type="text" 
+							placeholder="what do you need help with?">
+			<input type="submit">
+		</form>
+	</div>
+	<ul ng-repeat="q in questions.data">
+		<li><a 	href="#" 
+						class='linkbutton' 
+						ng-click="answersEnabled=!answersEnabled">
+						{{q.body}}
+				</a>
+			<div ng-show="answersEnabled">
+				<ul ng-repeat="ans in q.answers">
+					<li>{{ans.body}}...likes {{ans.likes}}</li>
+				</ul>
+				<div ng-controller="newAnswerController as newAnswers">
+					<form ng-submit="newAnswers.addAnswer()">
+						<textarea ng-model="newAnswers.newAnswerBody" 
+											placeholder="Answer this question">
+						</textarea>
+						<input type="submit">
+					</form>
+				</div>
+			</div>
+		</li>
+	</ul>
+</div>

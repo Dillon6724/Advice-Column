@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
+  resources :answers
+  root 'application#main'
+  resources :questions, only: [:index, :create], defaults: { format: :json } do
+    resources :answers, only: [:create], shallow: true
+  end
+
+  post '/answers/new/:question_id' => 'answers#create'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
